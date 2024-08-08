@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Which Colors</title>
+    {% block styles %}
+    <!-- Load Bootstrap-Flask CSS here -->
+    {{ bootstrap.load_css() }}
+    {% endblock %}
+</head>
+<body>
+    <div class="container d-flex flex-column text-center justify-content-between py-5">
+        <h1>Which Colors on this Image?</h1>
+        <h2>Upload your image to know its colors</h2>
+
+        <form method="post" enctype="multipart/form-data" action="/">
+           <input type="file" name="upload" class="form-control">
+            <input type="submit" value="Upload" class="btn btn-primary btn-lg btn-block w-100 py-1 my-2">
+        </form>
+
+        {% if error %}
+        <p>{{ error }}</p>
+        {% endif%}
+        {% if image %}
+        <div class="d-flex align-items-center justify-content-center">
+            <img src="{{ url_for('static', filename='uploads/' ~ image) }}" width="800" alt="Uploaded image">
+        </div>
+        <br>
+        {% if colors %}
+            <div class="d-flex text-center">
+            <table class="table table-hover">
+                <tr>
+                    <th>Color</th>
+                    <th>Hexa value</th>
+                    <th>Percentage</th>
+                </tr>
+                {% for color in colors %}
+                <tr>
+                    <td style="background-color: {{ color.value }}"></td>
+                    <td>{{ color.value }}</td>
+                    <td>{{ color.percent }}%</td>
+                </tr>
+                {% endfor%}
+            </table>
+        </div>
+        {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>

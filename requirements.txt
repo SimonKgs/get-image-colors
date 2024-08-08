@@ -1,0 +1,11 @@
+Bootstrap_Flask
+Flask_Login
+Werkzeug
+Flask
+gunicorn
+psycopg2
+python-dotenv
+pandas
+numpy
+pillow
+scipy
